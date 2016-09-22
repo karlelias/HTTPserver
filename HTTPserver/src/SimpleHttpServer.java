@@ -16,7 +16,7 @@ import java.util.Map;
 public class SimpleHttpServer {
 
     public static void main(String[] args) throws Exception {
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0",1215), 0);
         server.createContext("/", new MyHandler());
         server.setExecutor(null); // creates a default executor
         server.start();
@@ -65,5 +65,6 @@ public class SimpleHttpServer {
     }
 
     //mis toimub siin ma ei tea
+    //http://localhost:8000/test/request?param1=val1&param2=val2
 
 }
