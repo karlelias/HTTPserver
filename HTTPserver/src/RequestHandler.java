@@ -16,16 +16,14 @@ import com.sun.net.httpserver.HttpHandler;
 
 public class RequestHandler implements HttpHandler {
 
-    public static final String OK = "HTTP/1.1 200 OK";
-    public static final String BAD_REQUEST = "HTTP/1.1 400 BAD REQUEST";
+    private static final String OK = "HTTP/1.1 200 OK";
+    private static final String BAD_REQUEST = "HTTP/1.1 400 BAD REQUEST";
 
-    @Override
     public void handle(HttpExchange httpExchange) throws IOException {
 
         try {
             URI uri = httpExchange.getRequestURI();
             String path = uri.getPath();
-            String query = uri.getQuery();
             String remoteIP = httpExchange.getRemoteAddress().toString();
             remoteIP=remoteIP.substring(1, remoteIP.length());//remoete ip
             String method = httpExchange.getRequestMethod();
@@ -41,9 +39,6 @@ public class RequestHandler implements HttpHandler {
 
                 responseCode = 200;
                 response = OK;
-
-                //dobavitj id remoteIP
-                //proverka povtornyj li zapros ili net
 
                 if(Math.random()>P2PNode.lazyness){ //Otsustan file allalaadida
                     Logger.write("DOWNLOADING URL "+parameters.get("url")+" AND SENDING IT BACK TO "+remoteIP);
@@ -100,15 +95,15 @@ public class RequestHandler implements HttpHandler {
             os.flush();
             os.close();
         } catch (NumberFormatException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
     }
 
-    //Splits query and returnd linked hashmap with key and values in JSON
+    //Splits query and returns linked hashmap with key and values in JSON
     public  Map<String, String> splitQuery(URI uri) throws UnsupportedEncodingException {
         if(uri.getPath().equals("/download") || uri.getPath().equals("/file")) {
             Map<String, String> query_pairs = new LinkedHashMap<String, String>();
