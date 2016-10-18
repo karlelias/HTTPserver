@@ -29,7 +29,7 @@ public class RequestSender {
 
     //saadab getPeers päring
     public static String[] getPeers() throws Exception{
-        URL url = new URL("http://192.168.3.11:1215/getpeers");
+        URL url = new URL("http://192.168.6.1:1215/getpeers");
         String peers = sendGetRequest(url);
         String[] peersArray =  peers.replaceAll("\\s+","").replace("\"", "").replace("]", "").replace("[","").split(",");;
         return peersArray;

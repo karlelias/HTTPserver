@@ -43,6 +43,7 @@ public class P2PNode {
                     //Logger.write("PEERS UPDATED: "+ Arrays.toString(peers));
                     for(String peer:peers){
                         neighbors.add(peer);
+                        System.out.println(neighbors);
                     }
 
                 } catch (Exception e) {
