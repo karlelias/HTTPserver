@@ -15,6 +15,7 @@ public class P2PNode {
         server.setExecutor(null); // creates a default executor
         server.start();
         System.out.println("P2P node started successfully!");
+        RequestSender.sendNewDownloadRequest("http://ttu.ee");
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -26,7 +27,7 @@ public class P2PNode {
                     Logger.write("PEERS UPDATED: "+ Arrays.toString(peers));
                     for(String peer:peers){
                         neighbors.add(peer);
-                        System.out.println(neighbors);
+                        //System.out.println(neighbors);
                     }
 
                 } catch (Exception e) {
