@@ -7,17 +7,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Logger {
-    public static void write (String entry) throws Exception{
-        File file = new File("log.txt");
+    public static void write (String log) throws Exception{
+        File file = new File("logifail.txt");
         if (file.createNewFile()){
-            PrintWriter writer = new PrintWriter("log.txt", "UTF-8");
-            writer.println("///"+ LocalDate.now().toString()+ " "+LocalTime.now()+"/// P2P node created");
+            PrintWriter writer = new PrintWriter("logifail.txt", "UTF-8");
+            writer.println("///"+ LocalDate.now().toString()+ " "+LocalTime.now()+"/// P2P node alustatud");
             writer.close();
         } else {
-            FileWriter fileWritter = new FileWriter(file.getName(),true);
-            BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-            bufferWritter.write("\n///"+ LocalDate.now().toString()+ " "+LocalTime.now()+"/// "+entry);
-            bufferWritter.close();
+            FileWriter fileWriter = new FileWriter(file.getName(),true);
+            BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
+            bufferWriter.write("\n///"+ LocalDate.now().toString()+ " "+LocalTime.now()+"/// "+log);
+            bufferWriter.close();
         }
     }
 }

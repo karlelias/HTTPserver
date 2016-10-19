@@ -25,7 +25,7 @@ public class RequestHandler implements HttpHandler {
         try {
             URI uri = httpExchange.getRequestURI();
             String path = uri.getPath();
-            String query = uri.getQuery();
+            //String query = uri.getQuery();
             String remoteIP = httpExchange.getRemoteAddress().toString();
             remoteIP=remoteIP.substring(1, remoteIP.length());//remote ip
             String method = httpExchange.getRequestMethod();
@@ -44,6 +44,9 @@ public class RequestHandler implements HttpHandler {
 
                 responseCode = 200;
                 response = OK;
+
+                System.out.println("sain GET päringu");
+                System.out.println("\n" + parameters.get("url"));
 
 
                 if(!P2PNode.downloadRequestsRoutingTable.containsKey(id)) {
@@ -89,17 +92,16 @@ public class RequestHandler implements HttpHandler {
 
                 if(P2PNode.myRequestsIDs.contains(Integer.parseInt(id))){
 
-                    System.out.println(body.substring(0,1024));//kuvab mitte terve keha, vaid ainlt esimesed 1024 chari
+                    System.out.println(body.substring(0,1024));//kuvab mitte terve keha, vaid ainult keha esimesed 1024 sümbolit
                     Logger.write("RECIEVED REQUESTED FILE");
 
-                } else if(P2PNode.downloadRequestsRoutingTable.containsKey(id) //if entry with same request ID is already in downl routing table
+                } else if(P2PNode.downloadRequestsRoutingTable.containsKey(id) //Kui sama ID-ga asi on juba downlRif entry with same request ID is already in downl routing table
                         && !P2PNode.fileRequestsRoutingTable.containsKey(id)){
 
-                    String destanationIP = P2PNode.downloadRequestsRoutingTable.get(id);
-                    P2PNode.fileRequestsRoutingTable.put(id, remoteIP);//saves request ID and IP which sends this request to routing table
-                    Logger.write("SENDING /file REQUEST BACK ");
-                    String nodeResponse = RequestSender.sendPostRequest(new URL("http://"+destanationIP+uri),body);
-                    Logger.write(destanationIP + " RESPONSES: "+nodeResponse);
+                    String destinationIP = P2PNode.downloadRequestsRoutingTable.get(id);
+                    P2PNode.fileRequestsRoutingTable.put(id, remoteIP);//salvestab requesti ID ja IP millega see requesti ruutingu tabelisse läks                    Logger.write("SENDING /file REQUEST BACK ");
+                    String nodeResponse = RequestSender.sendPostRequest(new URL("http://"+destinationIP+uri),body);
+                    Logger.write(destinationIP + " RESPONSES: "+nodeResponse);
 
                 } else if (!P2PNode.fileRequestsRoutingTable.containsKey(id) ////request ID is new, no entries in downlReqRoutingTable nor fileReqRoutingTable
                         && !P2PNode.downloadRequestsRoutingTable.containsKey(id)) {
@@ -135,7 +137,6 @@ public class RequestHandler implements HttpHandler {
 
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

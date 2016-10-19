@@ -13,7 +13,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class RequestSender {
 
-    //teeb uus downl päring ja salvestab päringu id
+    //teeb uus downl päringu ja salvestab selle id listi
     public static void sendNewDownloadRequest(String url) throws Exception{
         int myRequestId = IdGenerator();
         P2PNode.myRequestsIDs.add(myRequestId);
@@ -46,10 +46,10 @@ public class RequestSender {
         }
     }
 
-    // saadab POST request
+    // saadab POST requesti
     public static String sendPostRequest(URL url, String body) throws Exception {
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        //add reuqest header
+        //add request header
         con.setRequestMethod("POST");
 
         // Send post request
@@ -109,9 +109,9 @@ public class RequestSender {
 
     //genereerib random ID
     public static int IdGenerator(){
-        return (int) Math.floor(Math.random() * (99999999 - 00000001 + 1)) + 00000001;
+        return (int) Math.floor(Math.random() * (99999999 - 1 + 1)) + 1;
     }
-    //kodeerib url turvaliseks
+    //kodeerib urli turvaliseks
     public static URL encodeURL(String string){
         try {
             String decodedURL = URLDecoder.decode(string, "UTF-8");
