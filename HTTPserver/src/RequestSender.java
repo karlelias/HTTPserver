@@ -22,12 +22,10 @@ public class RequestSender {
 
         for(String node:P2PNode.neighbors){
             Logger.write("SENDING NEW /download REQUEST " +pathQuery+" TO "+node);
-            try {
+
             String response = sendGetRequest(new URL("http://"+node+pathQuery));
             Logger.write(node+" responses: "+response);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+
         }
 
     }
