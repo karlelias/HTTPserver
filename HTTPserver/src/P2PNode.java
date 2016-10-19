@@ -12,8 +12,8 @@ import java.util.TimerTask;
 import com.sun.net.httpserver.HttpServer;
 
 public class P2PNode {
-    public static List<String> neighbors = new ArrayList<String>();//naabrite list, mis iga minut uueneb
-    public static List<Integer> myRequestsIDs = new ArrayList<Integer>();//minu requestide ID-s
+    public static List<String> neighbors = new ArrayList<String>();//list refreshes every minute
+    public static List<Integer> myRequestsIDs = new ArrayList<Integer>();//my request IDs only
     public static Map <String, String> downloadRequestsRoutingTable = new HashMap <String,String> ();//id downlIP
     public static Map <String, String> fileRequestsRoutingTable = new HashMap <String,String> ();//id fileIP
 
@@ -21,13 +21,13 @@ public class P2PNode {
     public static void main(String[] args) throws Exception {
         String url =  "";
 
-        if(args.length == 0 || args.length==6)
+        if(args.length == 0 || args.length>4)
         {
-            System.out.println("Proper usage is: java P2PNode -u url -l lazyness ");
+            System.out.println("Proper usage is: java P2PNode -l lazyness -u url ");
             System.exit(0);
         }else {
-            url = args[1];
-            lazyness = Double.parseDouble(args[3]);
+            url = args[3].toString();
+            lazyness = Double.parseDouble(args[1]);
         }
 
 
@@ -44,7 +44,7 @@ public class P2PNode {
                 try {
                     neighbors.clear();
                     String[] peers = RequestSender.getPeers();
-                    Logger.write("PEERS UPDATED: "+ Arrays.toString(peers));
+                    //Logger.write("PEERS UPDATED: "+ Arrays.toString(peers));
                     for(String peer:peers){
                         neighbors.add(peer);
                     }
