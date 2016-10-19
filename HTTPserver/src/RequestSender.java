@@ -22,10 +22,8 @@ public class RequestSender {
 
         for(String node:P2PNode.neighbors){
             Logger.write("SENDING NEW /download REQUEST " +pathQuery+" TO "+node);
-
             String response = sendGetRequest(new URL("http://"+node+pathQuery));
             Logger.write(node+" responses: "+response);
-
         }
 
     }
