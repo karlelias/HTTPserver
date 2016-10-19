@@ -2,12 +2,14 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.UnknownHostException;
 import java.util.Base64;
 
+import javax.net.ssl.HttpsURLConnection;
 
 public class RequestSender {
 
@@ -25,12 +27,12 @@ public class RequestSender {
         }
     }
 
-    //saadab getPeers päring naabrite leidmiseks
+    //saadab getPeers päring
     public static String[] getPeers() throws Exception{
         URL url = new URL("http://192.168.3.11:1215/getpeers");
         String peers = sendGetRequest(url);
-        String[] peersArr =  peers.replaceAll("\\s+","").replace("\"", "").replace("]", "").replace("[","").split(",");;
-        return peersArr;
+        String[] peersArray =  peers.replaceAll("\\s+","").replace("\"", "").replace("]", "").replace("[","").split(",");;
+        return peersArray;
     }
 
     //tagastab Base64 kodeeritud sisu
@@ -107,7 +109,7 @@ public class RequestSender {
 
     //genereerib random ID
     public static int IdGenerator(){
-        return (int) Math.floor(Math.random() * (99999999 - 1 + 1)) + 1;
+        return (int) Math.floor(Math.random() * (99999999 - 00000001 + 1)) + 00000001;
     }
     //kodeerib url turvaliseks
     public static URL encodeURL(String string){
