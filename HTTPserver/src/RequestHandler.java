@@ -92,7 +92,7 @@ public class RequestHandler implements HttpHandler {
 
                 if(P2PNode.myRequestsIDs.contains(Integer.parseInt(id))){
 
-                    System.out.println(body.substring(0,1024));//kuvab mitte terve keha, vaid ainult keha esimesed 1024 sümbolit
+                    System.out.println(body);//kuvab mitte terve keha, vaid ainult keha esimesed 1024 sümbolit
                     Logger.write("RECIEVED REQUESTED FILE");
 
                 } else if(P2PNode.downloadRequestsRoutingTable.containsKey(id) //Kui sama ID-ga asi on juba downlRif entry with same request ID is already in downl routing table
