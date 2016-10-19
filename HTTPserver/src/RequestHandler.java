@@ -27,7 +27,7 @@ public class RequestHandler implements HttpHandler {
             String path = uri.getPath();
             String query = uri.getQuery();
             String remoteIP = httpExchange.getRemoteAddress().toString();
-            remoteIP=remoteIP.substring(1, remoteIP.length());//remoete ip
+            remoteIP=remoteIP.substring(1, remoteIP.length());//remote ip
             String method = httpExchange.getRequestMethod();
             String response;
             Map<String, String> parameters = splitQuery(uri);
@@ -135,7 +135,6 @@ public class RequestHandler implements HttpHandler {
 
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

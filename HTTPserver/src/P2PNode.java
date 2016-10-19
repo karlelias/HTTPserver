@@ -1,5 +1,4 @@
 import java.net.InetSocketAddress;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,8 +11,8 @@ import java.util.TimerTask;
 import com.sun.net.httpserver.HttpServer;
 
 public class P2PNode {
-    public static List<String> neighbors = new ArrayList<String>();//list refreshes every minute
-    public static List<Integer> myRequestsIDs = new ArrayList<Integer>();//my request IDs only
+    public static List<String> neighbors = new ArrayList<String>();//naabrite list,mis uueneb igas minutis
+    public static List<Integer> myRequestsIDs = new ArrayList<Integer>();//minu requestide ID-de  list
     public static Map <String, String> downloadRequestsRoutingTable = new HashMap <String,String> ();//id downlIP
     public static Map <String, String> fileRequestsRoutingTable = new HashMap <String,String> ();//id fileIP
 
@@ -37,8 +36,8 @@ public class P2PNode {
         server.start();
         System.out.println("P2P node started!");
 
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
+        Timer loop = new Timer();
+        loop.schedule(new TimerTask() {
             @Override
             public void run() {
                 try {
